@@ -90,88 +90,43 @@ class Board:
                     chadAdj = 0
                     prevChar = self.board[h][w] if self.board[h][w] != 'O' else ""
 
-        invert = False
-        shift = 0
-        end = False
-        while not end:
-            base = shift
+        size = self.width + self.height
+        for k in range(size-2):
             prevChar = ""
-            adjChar = 0
-            for h in range(len(self.board)):
-                if base == self.width :
-                    print("invert")
-                    shift = self.width
-                    invert = True
-                    base -= 1
-                print(self.board[h][base], h, base, prevChar, adjChar)
-                if self.board[h][base] == prevChar and self.board[h][base] != 'O':
-                    adjChar += 1
-                    if adjChar == 3:
-                        return True
-                else:
-                    adjChar = 0
-                    prevChar = self.board[h][base] if self.board[h][base] != 'O' else ""
-
-                if invert:
-                    print("sub 1", base)
-                    base -= 1
-                else:
-                    print("add 1")
-                    base += 1
-
-            if shift == 1 and invert:
-                invert = False
-                end = True
-            elif invert:
-                shift -= 1
-            else:
-                shift += 1
-
-        invert = False
-        shift = 0
-        while True:
-            base = shift
-            prevChar = ""
-            adjChar = 0
-            for h in range(len(self.board)-1,0):
-                if base == self.width-1 :
-                    print("inversion")
-                    invert = True
-                    base -= 1
-                if self.board[h][base] == prevChar and self.board[h][base] != 'O':
-                    print("check")
-                    adjChar += 1
-                    if adjChar == 3:
-                        return True
-                else:
-                    adjChar = 0
-                    prevChar = self.board[h][base] if self.board[h][base] != 'O' else ""
-
-                if invert:
-                    base -= 1
-                else:
-                    base += 1
-
-            if shift == 1 and invert:
-                break
-            elif invert:
-                shift -= 1
-            else:
-                shift += 1
-
-        return False
-
+            charAdj = 0
+            for j in range(k):
+                i = k - j
+                if i < self.width-1 and j < self.height-1:
+                     print(k,i,j, self.board[i][j], prevChar, charAdj)
+                     if self.board[i][j] != "O" and self.board[i][j] == prevChar:
+                         print("check")
+                         charAdj += 1
+                         if charAdj == 3:
+                             return True
+                     else:
+                         charAdj = 0
+                         prevChar = self.board[i][j] if self.board[i][j] != 'O' else ""
 b = Board(7,6)
-b.play(4, 'j')
-b.play(4, 'j')
-b.play(4, 'j')
-b.play(4, 'r')
-b.play(3, 'j')
-b.play(3, 'j')
-b.play(3, 'r')
+#b.play(4, 'j')
+#b.play(4, 'j')
+#b.play(4, 'j')
+#b.play(4, 'r')
+#b.play(3, 'j')
+#b.play(3, 'j')
+#b.play(3, 'r')
+#b.play(2, 'j')
+#b.play(2, 'r')
+#b.play(1, 'r')
+b.play(1, 'j')
+b.play(1, 'j')
+b.play(1, 'j')
+b.play(1, 'r')
+b.play(2, 'j')
 b.play(2, 'j')
 b.play(2, 'r')
-b.play(1, 'r')
+b.play(3, 'j')
+b.play(3, 'r')
+b.play(4, 'r')
 print(b)
 print(b.checkWin())
 #b.run()
